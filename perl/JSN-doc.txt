@@ -1,0 +1,51 @@
+////
+1-2 A4 stran PDF
+  10p Times New Roman + Courier pro identifikatory a kratke uryvky kodu
+  zadna zvlastni strana, ani obsah, ani zaver pro ulohy
+  nadpis prvni urovne 12p
+  nadpis druhe urovne 11p
+
+muj zpusob reseni
+  sporne pripady ze zadani
+  filozofie navrhu
+  muj konecny automat, moje pravidla gramatiky atd.
+
+Dokumentace úlohy JSN: JSON2XML v Perl do IPP 2011/2012
+Jméno a příjmení: Jan Pacner
+Login: xpacne00
+
+--xsl-file=XSL_FILE
+  Override the built-in XSL stylesheet with the custom XSL stylesheet XSL_FILE.
+--fop
+  Use FOP to generate PDFs. The default behavior is to use dblatex(1). The --fop
+  option is implicit if this option is used.
+
+The Article Title
+=================
+Author's Name <authors@email.address>
+v1.0, 2003-12
+
+
+This is the optional preamble (an untitled section body). Useful for
+writing simple sectionless documents consisting only of a preamble.
+
+NOTE: The abstract, preface, appendix, bibliography, glossary and
+index section titles are significant ('specialsections').
+////
+
+
+Nejaky nadpis
+=============
+pass::[<?dblatex bgcolor="#cceeff"?>]#
+Obsah prvniho odstavce.#
+
+
+'Druhy odstavec.'
+
+
+Tak nevim
+---------
+[red]#Dalsi neco#
+
+
+// vim: set ft=asciidoc:

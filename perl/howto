@@ -1,0 +1,132 @@
++common::sense: 3.0
+-Data::Dumper
++Data::Types: 0.08
++Data::Walk 1.0
+-Encode 2.12
+-Getopt::Long: 2.35
+-IO:File
++JSON: 2.17
+-JSON::PP: 2.27000
+-JSON::XS: 2.28
+-XML::LibXML
+-XML::Parser: 2.34
+-XML::Parser::EasyTree
++XML::RegExp         PRO kontrolu validity entiti XML dokumentu
+-XML::Simple: 2.18
+-XML::Writer: 0.606
+-XML::Writer::String
+
+use strict;
+use warnings;
+
+napr.
+  [
+  "30",
+  30
+  ]
+spravne:
+  <array>
+  <item value="30"/>
+  <item value="30"/>
+  </array>
+spatne:
+  <array>
+  <item value="\"30\""/>
+  <item value="30"/>
+  </array>
+
+napr.
+  [
+  30.6,
+  "30.6"
+  ]
+spravne s parametrem -n
+  <array>
+  <item value="31"/>
+  <item value="30.6"/>
+  <array>
+spravne s parametrem -n -i
+  <array>
+  <item>31</item>
+  <item value="30.6"/>
+  <array>
+spravne s parametrem -n -s
+  <array>
+  <item value="31"/>
+  <item>30.6</item>
+  <array>
+
+napr.
+  {
+  "literaly" :
+    [
+      "true",
+      "false",
+      true,
+      false,
+      null
+    ],
+  }
+vystum pro parametr -n -l
+  <literaly>
+    <array>
+      <item value="true"/>
+      <item value="false"/>
+      <item>
+        <true/>
+      </item>
+      <item>
+        <false/>
+      </item>
+      <item>
+        <null/>
+      </item>
+    </array>
+  </literaly>
+
+napr.
+  {"f/.!agaga": {
+      "h+der": "SVG Viewer",
+      "ite>s": [
+          {"i&": "Op&nNew", "l<bel": "Open== New"},
+          false,
+          {"id": "About", "label": "About Adobe CVG Viewer..."}
+      ]
+  }}
+bez parametru
+  <?xml version="1.0" encoding="UTF-8"?>
+  <f-.-agaga>
+  <ite-s>
+  <array>
+  <item>
+  <l-bel value="Open== New" />
+  <i- value="Op-nNew" />
+  </item>
+  <item value="false" />
+  <item>
+  <label value="About Adobe CVG Viewer..." />
+  <id value="About" />
+  </item>
+  </array>
+  </ite-s>
+  <h-der value="SVG Viewer" />
+  </f-.-agaga>
+s parametrem -c
+  <?xml version="1.0" encoding="UTF-8"?>
+  <f-.-agaga>
+  <ite-s>
+  <array>
+  <item>
+  <l-bel value="Open== New" />
+  <i- value="Op&amp;nNew" />
+  </item>
+  <item value="false" />
+  <item>
+  <label value="About Adobe CVG Viewer..." />
+  <id value="About" />
+  </item>
+  </array>
+  </ite-s>
+  <h-der value="SVG Viewer" />
+  </f-.-agaga>
+

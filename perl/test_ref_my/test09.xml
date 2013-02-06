@@ -1,0 +1,43 @@
+<firstName>
+John
+</firstName>
+<newSubscription value="false"/>
+<companyName value="null"/>
+<address>
+<streetAddress>
+21 2nd Street
+</streetAddress>
+<city>
+New York
+</city>
+<postalCode>
+10021
+</postalCode>
+<state>
+NY
+</state>
+</address>
+<lastName>
+Smith
+</lastName>
+<phoneNumber>
+<array>
+<item>
+<number>
+212 555-1234
+</number>
+<type>
+home
+</type>
+</item>
+<item>
+<number>
+646 555-4567
+</number>
+<type>
+fax
+</type>
+</item>
+</array>
+</phoneNumber>
+<age value="25"/>

@@ -1,0 +1,20 @@
+/*
+@font-face {
+  font-family : LiberationSerif-Regular;
+  font-weight : normal;
+  font-style: normal;
+  src : url(LiberationSerif-Regular.ttf);
+}
+
+body {
+  font-family: LiberationSerif-Regular, serif;
+}
+*/
+
+p.ex1 {
+  font:15px arial,sans-serif;
+}
+
+p.ex2 {
+  font:italic bold 12px/30px Georgia, serif;
+}

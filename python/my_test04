@@ -1,0 +1,19 @@
+# incomplete DFA (can get stuck)
+(
+{a, b, c, d},
+{x, y},
+{
+  a x->b,
+  a y->c,
+  b x->c,
+  b y->d,
+  c x->d,
+  c y->a,
+  d x->a,
+  d y->b
+},
+a,
+{a, b}
+)
+
+# vim: set autoindent:

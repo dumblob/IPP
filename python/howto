@@ -1,0 +1,141 @@
+argparse: 1.1
+csv: 1.0
+codecs
+getopt
+json: 2.0.9
+xml.dom.minidom
+xml.etree.ElementTree
+
+# optionParser (zpracovani argumentu)
+http://www.zdrojak.cz/clanky/python-profesionalne-co-jazyk-nabizi/
+
+kontrola nakonec
+  Za posledním prvkem v množině se nesmí vyskytovat čárka.
+  Za poslední komponentou automatu (před ukončením automatu kulatou zavírací
+    závorkou) se také nesmí vyskytovat čárka.
+  Nevkládejte žádné přebytečné mezery nebo odřádkování (bílé znaky). Normovaný
+    výstupní formát je specifikován přesně i v tomto ohledu (viz zveřejněné
+    příklady).
+  Chybí vzestupné seřazení prvků v množinách i při výpisu sloučených stavů.
+  Ve výpisu chybí odřádkování za otevírací kulatou závorkou definice celého
+    automatu (před výpisem první komponenty).
+  Neprovádějte žádné nežádoucí optimalizace (např. vypouštění nepoužitých
+    symbolů/stavů z množiny symbolů/stavů, pokud to nebylo v zadaných
+    algoritmech prováděno).
+
+err
+  60 nespravna syntaxe vstupniho MKA
+  61 semanticka chyba:
+     prazdna vstupni abeceda
+     prvni + druha komponenta NEjsou disjunktni
+     startujici stav NEni v mnozine stavu
+     mnozina koncovych stavu NEni podmnozinou mnoziny stavu
+  opakovani stejnych pravidel/stavu/symbolu v ramci mnoziny JE povoleno (
+    NEni to multimnozina)
+  62 NEni to dobre specifikovany konecny automat
+     DSKA <=> uplny DKA (nemuze se zaseknout => docte vzdy vstup) +
+       konecna_mnozina_stavu
+         NEma nedostupne stavy +
+         ma maximalne 1 neukoncujici stav
+
+parametry
+  --help
+  --input=filename
+    vstup je v UTF-8
+  --output=filename
+  -f --find-non-finishing
+    provede validaci na DSKA + hleda neukoncujici stav vstupniho DSKA
+    pokud nalezen, tak ho vypise do output_file (jinak nic nevypisuje)
+    FIXME NElze kombinovat s -m
+  -m --minimize
+    minimalizuje DSKA
+    pokud se tento neuvede, tak se pouze validuje na DSKA + normalizovane
+      vypise do output_file
+    NElze kombinovat s -f
+  -i --case-insensitive
+    NEbrat ohled na sensitivitu (vystupem budou POUZE mala pismena)
+
+stepeny stav se nakonec vytiskne jako spojeni dilcich stavu podtrzitkem podle
+  ordinalni hodnoty vzestupne
+  {s1, p2, p, P2} na P2_p_p2_s1
+
+vystup
+  odpovida pravidlum vstupu
+  bez bilych znaku a komentaru
+  kazda komponenta zacina na zvlastnim radku
+  krome mnoziny pravidel budou vsechny komponenty prave na 1 radku
+  za kazdou komponentou bezprostredne carka a odradkovani LF
+    za posledni komponentou bude pouze LF (zadna carka!!!)
+      => uzaviraci kulata zavorka bude na novem radku
+  stavy v mnozine stavu (resp. symboly ve vstupni abecede) oddeleny carkou a
+      mezerou (za poslednim zadna carka, ani mezera)
+    a ve svych komponentach razeny lexikograficky vzestupne
+    kazdy symbol vstupni abecedy bude v apostrofech
+  kazde pravidlo z mnoziny pravidel zacina na novem radku
+    => LF bude i za otevirajici levou slozenou zavorkou
+    => uzavirajici prava slozena zavorka bude tez na novem radku
+    oddelujici carka a LF bude hned za identifikatorem ciloveho stavu
+    mnozina vyslednych pravidel bude vzestupne do seznamu pravidel podle
+      sdruzeneho klice ze 3 podklicu
+        primarni klic je identifikator vychoziho stavu (lexikograficky podle
+          ordinalnich hodnot znaku)
+        sekundarni je znak reprezentujici vstupni symbol bez pripadnych
+          uvozujicich apostrofu (lexikograficky podle ordinalni hodnoty
+          znaku; prazdny retezec ma 0)
+        treti je identifikator ciloveho stavu (razeno jako primarni klic)
+    vstupni symbol v pravidlech a prazdny retezec VZDY v apostrofech
+    casti pravidla oddeleny prave 1 mezerou + za pravidlem carka
+
+# komentar do konce radku
+
+bily znak
+  \n \r mezera tabulator
+  ignorovany
+
+identifikator
+  jako v C
+  NEzacina podtrzitkem
+  NEkonci podtrzitkem
+
+vstupni symbol
+  obycejny NE-specialni JEDEN znak (case-sensitive)
+    specialni znaky, ktere musi byt v apostrofech
+      ( ) { } - > , . | # mezera tabulator \n \r
+  v '' muze byt jakykoliv znak + specialni pripady:
+    '' je prazdny retezec
+    '''' zdvojeny apostrof je ve vysledku apostrof
+
+automat == petice v kulatych zavorkach
+  kazda komponenta krome startujiciho stavu je ve { }
+  v { } je vse oddelene carkou
+  komponenty taktez oddelene carkou
+
+konecna mnozina stavu
+neprazdna vstupni abeceda
+definice mnoziny pravidel
+  == seznam pravidel
+    vychozi_stav cteny_vstupni_symbol-MUZE_byt_vynechan_nebo_'' -> cilovy_stav
+  pokud mame nejaky vstupni symbol, tak musi byt oddeleny bilym znakem od p
+  pokud vsak vstupnim symbolem jsou apostrofy, tak muze byt i bez bileho znaku
+    p->q       # validni
+    pa -> q    # NEvalidni
+    p a->q     # validni
+    p''-> q    # validni
+    p '' -> q  # validni
+startujici stav
+mnozina koncovych stavu (muze byt klidne prazdna)
+
+# Příklad konečného automatu ve vstupním formátu úlohy MKA
+({s, f,q4,q2 , q1, # nějaký komentář
+q3},               # nějaký komentář
+{á, ’)’ }, {
+s á->f, f á ->s, s’)’->q3, s ’)’ -> q4,
+q1 á->q1, q2 á -> q2, q3 á->q4, q4 á->
+
+q3, q1 ’)’ -> s, q2’)’
+->f , q3 ’)’->q1, q4’)’->q2 # další komentář
+},                 # následuje komponenta definující startující stav
+s
+, {f, s } )        # koncové stavy a ukončení definice automatu
+# zde může následovat libovolný počet bílých znaků nebo komentářů
+

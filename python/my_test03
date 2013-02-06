@@ -1,0 +1,19 @@
+# loops (inaccessible states)
+(
+{a, b, c, d},
+{x, y},
+{
+  a x->b,
+  a y->b,
+  b x->a,
+  b y->a,
+  c x->d,
+  c y->d,
+  d x->c,
+  d y->c
+},
+a,
+{a, b}
+)
+
+# vim: set autoindent:

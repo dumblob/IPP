@@ -1,0 +1,43 @@
+<firstName>
+    John
+</firstName>
+<companyName value="null"/>
+<lastName>
+    Smith
+</lastName>
+<age value="25"/>
+<phoneNumber>
+    <array>
+        <item>
+            <type>
+                home
+            </type>
+            <number>
+                212 555-1234
+            </number>
+        </item>
+        <item>
+            <type>
+                fax
+            </type>
+            <number>
+                646 555-4567
+            </number>
+        </item>
+    </array>
+</phoneNumber>
+<address>
+    <postalCode>
+        10021
+    </postalCode>
+    <city>
+        New York
+    </city>
+    <streetAddress>
+        21 2nd Street
+    </streetAddress>
+    <state>
+        NY
+    </state>
+</address>
+<newSubscription value="false"/>
